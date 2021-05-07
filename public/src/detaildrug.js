@@ -14,7 +14,6 @@ function addAlert(){
     var namealertdrung = nameDrungshow.value;
     var timealertdrung = timealert.value;
     updateData(namealertdrung,timealertdrung);
-
     }else{
         alert("กรุณาตั้งเวลา")
     }
@@ -22,7 +21,7 @@ function addAlert(){
 
 function updateData(namealertdrung,timealertdrung){
     var settings = {
-        "url": "http://localhost:8080/insertdata/"+sessionStorage.userID+"/"+timealertdrung+"/"+namealertdrung+"",
+        "url": "/insertdata/"+sessionStorage.userID+"/"+timealertdrung+"/"+namealertdrung+"",
         "method": "POST",
         "timeout": 0,
       };
