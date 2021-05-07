@@ -5,15 +5,15 @@ const { google } = require('googleapis');
 const keys = require('./alertapi.json');
 const PORT = process.env.PORT || 8080
 
-
-
 app.use(express.static("public"));
 
 const config = {
-    user: 'postgres',
-    database: 'alertdung',
-    password: '2624',
-    port: 5432       
+    host: 'ec2-3-215-57-87.compute-1.amazonaws.com',
+    user: 'tkezprifggcogx', 
+    database: 'd46gmabaahpvb6',
+    password: '11cdbf4d4fc32faf0b0e5401fe423c532981d8f9f8ab5688850792ef1f983942',
+    port: 5432,
+    ssl: { rejectUnauthorized: false }
 };
 const pool = new pg.Pool(config);
 
@@ -86,7 +86,6 @@ async function gsrun(cl){
         range: 'Sheet1!A'+(index+1)+':E'+(index+1)+''
     };
     var FNdata = await gsapi.spreadsheets.values.get(opt2);
-    console.log(FNdata.data.values)
     var nonofulldata = FNdata.data.values
   
     const drive = google.drive({version: 'v3', auth: cl});
@@ -100,20 +99,15 @@ async function gsrun(cl){
         const files = res.data.files;
         idphoto = ''
         if (files.length) {
-            console.log('Files:');
             files.map((file) => {
-                console.log(`${file.name} (${file.id})`);
                 idphoto = "https://drive.google.com/uc?export=view&id=" + file.id
                 nonofulldata["0"].push(idphoto)
                 fulldata = nonofulldata
-                console.log(fulldata)
             });
         } else {
-            console.log('No files found.');
             idphoto = "https://siph-space.sgp1.digitaloceanspaces.com/uploads/editor/1598261295_medicine.jpg"
             nonofulldata["0"].push(idphoto)
             fulldata = nonofulldata
-            console.log(fulldata)
         }
         });
 }
@@ -129,11 +123,11 @@ function myTimer(){
             if (err) {
                 console.log(err);
             }
-            console.log(result.rows["1"].timealert)
             alerttime(result.rows)
         })
     })     
 }
+
 function alerttime(dataalert){
     for (index = 0; index < dataalert.length; index++) {
         var d = new Date()
@@ -209,11 +203,11 @@ app.get('/home', (req, res, next) => {
     res.sendFile(__dirname + '/public/home.html')
 })
 
+
+
 app.post('/data/:username/:pass', (req, res, next) => {
     var username = req.params.username
     var password = req.params.pass
-    console.log(username)
-    console.log(password)
     pool.connect(function (err, client, done) {
        if (err) {
            console.log("Can not connect to the DB" + err);
@@ -252,7 +246,6 @@ app.post('/checkregister/:username/:pass/:tokenline', (req, res, next) => {
     })
 })
 });
-
 app.get('/alertdung/:username', (req, res, next) => {
     var username = req.params.username
     pool.connect(function (err, client, done) {
@@ -272,7 +265,6 @@ app.get('/alertdung/:username', (req, res, next) => {
 
 app.post('/Delete/:jobnumber', (req, res, next) => {
     var jobnumberdata = req.params.jobnumber
-    console.log(jobnumberdata)
     pool.connect(function (err, client, done) {
        if (err) {
            console.log("Can not connect to the DB" + err);
