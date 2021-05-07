@@ -8,35 +8,74 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="https://www.thonburihospital.com/uploads/knowledge/20160224014653_upload_file_th.jpg">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
+<!-- 
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png"> -->
 
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-
+    <link rel="stylesheet" href="/css/adminlte.min.css">
+    
+    
   </head>
 
+  <header id="header" class="fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <div class="logo">
+                <!-- <img  src="images/favicon.png" width="40"  height="40"> -->
+            </div>
+            <button class="navbar-toggler"
+                type="button" 
+                data-toggle="collapse" 
+                data-target="#navbarTogglerDemo02" 
+                aria-controls="navbarTogglerDemo02"
+                aria-expanded="false" 
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home">Homepage</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/alertdrug">Alertdrug</a>
+                </li>
+                </ul>
+                <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" ><font color="red" id="usernameid"> Anonymous </font></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Logout</a>
+                </li>
+                </ul>
+            </div>
+        </div>  
+    </nav>
+</header>
+
+  <div id="main-wrapper" class="mini-sidebar">
   <body class="sidebar-mini control-sidebar-slide-open sidebar-closed sidebar-collapse" style="height: auto;">
     <div class="wrapper">
       
-      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- <nav class="main-header navbar navbar-expand navbar-white navbar-light"> -->
         
             
-        <ul class="navbar-nav ml-auto">
+        <!-- <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">
             <a href="https://alertdrugpj.web.app/alertdrug" class="nav-link btn btn-secondary "><font color=##FFFFFF>รายการแจ้งเตือน</font></a>
-            
           </li>
 
-        </ul>
+        </ul> -->
       </nav>
-      <div class="content-wrapper" style="min-height: 583px;">
+      <!-- <div class="content-wrapper" style="min-height: 583px;"> -->
         <section class="content">
           <div class="container-fluid">
             <div class="row text-center">
@@ -65,14 +104,6 @@
                           </div>
                       </div>
                   </div>
-                    <!-- <table id="example" class="table table-bordered text-center">
-                      <thead>
-                        <tr>
-                            <th class="text-center">ชื่อยา</th>
-                            <th class="text-center">Detail</th>
-                        </tr>
-                    </thead>
-                  </table> -->
                   
                   </div>
                   
@@ -84,30 +115,35 @@
 
         </section>
 
-      </div>
+      <!-- </div> -->
                             
     </div>
-          
-    <script src="app/index.js"></script>
 
     <script src="public/jquery/dist/jquery.min.js"></script>
 
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
 
-
     <script src="bootstrap/multicheck/datatable-checkbox-init.js"></script>
+
     <script src="bootstrap/multicheck/jquery.multicheck.js"></script>
 
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
     <script src="bootstrap/DataTables/datatables.min.js"></script>
 
+    <script src="src/home.js"></script>
+
 
 
     <script>
-       $( document ).ready(function() {
+      if (sessionStorage.userID == null){
+        window.location.assign("http://localhost:8080")
+      }
+
+      $( document ).ready(function() {
+        $("#usernameid").text(sessionStorage.userID);
         readyindex()
-       })
+      })
     </script>
 
     </body>

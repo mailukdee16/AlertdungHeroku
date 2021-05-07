@@ -1,0 +1,253 @@
+<html lang="en" style="height: auto;"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>รายละเอียดยา</title>
+  <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+
+  <!-- Google Font: Source Sans Pro -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.thonburihospital.com/uploads/knowledge/20160224014653_upload_file_th.jpg">
+
+  <link rel="stylesheet" href="/css/adminlte.min.css">
+</head>
+<div class="wrapper">
+<header id="header" class="fixed-top ">
+  <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+          <div class="logo">
+              <!-- <img  src="images/favicon.png" width="40"  height="40"> -->
+          </div>
+          <button class="navbar-toggler"
+              type="button" 
+              data-toggle="collapse" 
+              data-target="#navbarTogglerDemo02" 
+              aria-controls="navbarTogglerDemo02"
+              aria-expanded="false" 
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item">
+                  <a class="nav-link" href="/Home">Homepage</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/alertdrug">Alertdrug</a>
+              </li>
+              </ul>
+              <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" ><font color="red" id="usernameid"> Anonymous </font></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/">Logout</a>
+              </li>
+              </ul>
+          </div>
+      </div>  
+  </nav>
+</header>
+
+<body class="sidebar-mini sidebar-closed sidebar-collapse" style="height: auto;">
+    
+  <style>
+    .timepicker {
+    position: absolute;
+    z-index: 1000;
+    float: left;
+    width: 160px;
+    padding-bottom: 5px;
+    margin: 2px 0 0 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+  }
+  </style>
+    <!-- Content Wrapper. Contains page content -->
+    <!-- <div class="content-wrapper" style="min-height: 542px;"> -->
+      <!-- Content Header (Page header) -->
+      <div class="modal fade" id="addDrung" tabindex="-1" role="dialog" aria-labelledby="addDrung" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addDrung">TimeAlert</h5> 
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="lname" class="col-sm-5 text-center control-label col-form-label">Name Drung :</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control text-center" id="nameDrungshow" disabled>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="lname" class="col-sm-5 text-center control-label col-form-label">Time Alert :</label>
+
+                  <div class="col-sm-6">
+                    <input id="timealert" type="text" class="form-control bs-timepicker text-center" placeholder="ตั้งเวลา" />
+                  </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" onclick="addAlert()">Alert</button>
+            </div>
+          </div>
+        </div>
+    </div>
+  
+      <!-- Main content -->
+      <section class="content text-center ">
+        <div class="container-fluid ">
+          <div class="row ">
+            <div class="col-md-6 mx-auto">
+              <div class="card-header">
+                <h3 class="card-title">
+                      <h2 class=" fa-window-maximize "></h2>รายชื่อยาทั้งหมด</h3>
+              </div>
+              <!-- Profile Image -->
+              <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                  <div class="text-center">
+                    <img id="getphoto" class=" img-fluid img-circle" src="dist/img/user4-128x128.jpg" 
+                    alt="User profile picture">
+                  </div>            
+                </div>
+              </div>
+
+              <!-- About Me Box -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">รายละเอียดยา</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <strong><i class="fas fa-book mr-1"></i>ชื่อยา</strong>
+  
+                  <p id="namedrung" class="text-muted">//////////</p>
+  
+                  <hr>
+  
+                  <strong><i class="fas fa-map-marker-alt mr-1"></i>สรรพคุณ</strong>
+  
+                  <p id="propertiesdrung" class="text-muted">//////////////</p>
+  
+                  <hr>
+  
+                  <strong><i class="fas fa-pencil-alt mr-1"></i>รายละเอียด</strong>
+  
+                  <p id="infodrung" class="text-muted">
+              
+                             
+                    </p>
+  
+                  <hr>
+                  <a class="btn btn-block btn-success" onclick="addDrung()" ><b>เพื่มการแจ้งเตือน</b></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /.content -->
+    </div>
+
+  <!-- ./wrapper -->
+  
+  <!-- jQuery -->
+  <script src="/public/jquery/dist/jquery.min.js"></script>
+
+  <script src="/public/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+
+  <link rel="stylesheet" href="/bootstrap/user-friendly-time-picker/dist/css/timepicker.min.css" />
+
+  <script src="/public/bootstrap/user-friendly-time-picker/dist/js/timepicker.min.js"></script>
+
+  <script src="/src/detaildrug.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $("#usernameid").text(sessionStorage.userID);
+
+      var d = new Date();
+      var n = d.getHours();
+      var m = d.getMinutes();
+      console.log(n)
+      console.log(m)
+        var myVar2 = setInterval(myTimer2, 6000);
+            function myTimer2(){
+                console.log("-------myTimerTimeOut-------")
+                clearInterval(myVar);
+                clearInterval(myVar2);
+            }
+
+        var myVar = setInterval(myTimer, 300);
+        var checkdata
+        $.ajax({
+                type:"GET",
+                url:"/checkdata",
+                dataType:'json',
+                success: function (response) {
+                if(response == ""){
+                    console.log("-----ERROR-----")
+                } else {
+                    checkdata = response["0"].idname
+                }
+            }
+        });
+
+        function myTimer(){
+        $.ajax({
+                type:"GET",
+                url:"/data",
+                dataType:'json',
+                success: function (response) {
+                if(response == ""){ 
+                    console.log("-----ERROR-----")
+                } else {
+                    if(response["0"]["0"] == checkdata){
+                      console.log(response)
+                        $("#getphoto").attr("src", response["0"]["5"]);
+
+                        if(response["0"]["1"] != ""){
+                            $("#nameDrungshow").val(response["0"]["1"]);
+                            $("#namedrung").html(response["0"]["1"]);
+                            howtousevalue = response["0"]["1"]
+                        }
+                        if(response["0"]["2"] != ""){
+                            $("#propertiesdrung").html(response["0"]["2"]);
+                            infovalue = response["0"]["2"]
+                        }
+                        if(response["0"]["3"] != ""){
+                            $("#infodrung").html(response["0"]["3"]);
+                            warningvale = response["0"]["3"]
+                        }
+                        clearInterval(myVar);
+                    }else{
+                        $("#nav-Howtouse").html("ไม่พบข้อมูลฉลากยา");
+                    }
+                }
+            }
+        });
+      }
+    })
+  </script>
+
+</body>
+
+</html>

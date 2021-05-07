@@ -1,0 +1,112 @@
+<html lang="en" style="height: auto;" class="control-sidebar-animate">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>การแจ้งเตือน</title>
+
+        <link rel="icon" type="image/png" sizes="16x16" href="https://www.thonburihospital.com/uploads/knowledge/20160224014653_upload_file_th.jpg">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
+
+        <link rel="stylesheet" href="/css/adminlte.min.css">
+
+    </head>
+    <header id="header" class="fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <div class="logo">
+                    <!-- <img  src="images/favicon.png" width="40"  height="40"> -->
+                </div>
+                <button class="navbar-toggler"
+                    type="button" 
+                    data-toggle="collapse" 
+                    data-target="#navbarTogglerDemo02" 
+                    aria-controls="navbarTogglerDemo02"
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home">Homepage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/alertdrug">Alertdrug</a>
+                    </li>
+                    </ul>
+                    <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link" ><font color="red" id="usernameid"> Anonymous </font></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/">Logout</a>
+                    </li>
+                    </ul>
+                </div>
+            </div>  
+        </nav>
+    </header>
+
+    <body class="sidebar-mini control-sidebar-slide-open sidebar-closed sidebar-collapse" style="height: auto;">
+        <!-- Site wrapper -->
+        <div class="wrapper">
+            
+            <div class="card-header">
+                <h3 class="card-title">
+                <h2 class=" fa-window-maximize "></h2>รายชื่อยาทั้งหมด</h3>
+            </div>
+
+            <h3 class="text-center">การแจ้งเตือนของฉัน</h3>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">No.</th>
+                                            <th class="text-center">NameDrung</th>
+                                            <th class="text-center">TimeAlert</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Delete</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+          <script src="public/jquery/dist/jquery.min.js"></script>
+
+          <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+      
+          <script src="bootstrap/multicheck/datatable-checkbox-init.js"></script>
+      
+          <script src="bootstrap/multicheck/jquery.multicheck.js"></script>
+      
+          <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+      
+          <script src="bootstrap/DataTables/datatables.min.js"></script>
+
+        <script src="/public/src/alertdrug.js"></script>
+
+        <script>
+            $( document ).ready(function() {
+                insertdata()
+                $("#usernameid").text(sessionStorage.userID);
+            })
+        
+        </script>
+
+</body>
+
+</html>
